@@ -7,3 +7,4 @@ pytest
 aiosqlite  
 sqlalchemy
 python-dotenv
+firebase-admin
