@@ -1,10 +1,7 @@
-from sqlalchemy import Column, Integer, String
-from app.database import Base
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import registry
 
+Base = declarative_base()
+mapper_registry = registry()
 
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+from .user import User
