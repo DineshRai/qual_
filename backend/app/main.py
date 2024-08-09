@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from .middleware.auth import verify_token
 from app.database import async_engine
 from app import models
-from app.routers import users, auth
+from app.routers import users, auth, files, projects, analyses, activities
 from app.config.firebase_admin import initialize_firebase
+from fastapi.routing import APIRoute
+
 
 import asyncio
 
@@ -29,6 +31,10 @@ async def on_startup():
 
 app.include_router(users.router)
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(files.router, prefix="/files", tags=["files"])
+app.include_router(projects.router, prefix="/projects", tags=["projects"])
+app.include_router(analyses.router, prefix="/analyses", tags=["analyses"])
+app.include_router(activities.router, prefix="/activities", tags=["activities"])
 
 @app.get("/")
 async def root():
@@ -37,3 +43,17 @@ async def root():
 @app.get("/protected")
 async def protected_endpoint(current_user: dict = Depends(verify_token)):
     return {"message": "Protected endpoint", "user": current_user}
+
+
+@app.get("/routes")
+def get_routes():
+    routes = []
+    for route in app.routes:
+        if isinstance(route, APIRoute):
+            route_info = {
+                "path": route.path,
+                "name": route.name,
+                "methods": list(route.methods),
+            }
+            routes.append(route_info)
+    return routes

@@ -2,10 +2,12 @@
 /frontend/node_modules
 /frontend/.pnp
 /frontend/.pnp.js
+/frontend/.yarn/install-state.gz
 
 # Next.js
 /frontend/.next/
 /frontend/out/
+.next
 
 # Production
 /frontend/build
@@ -21,17 +23,19 @@ yarn-error.log*
 
 # Local env files
 .env
+.env*.local
 /backend/.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-/frontend/.env.local
-/backend/app/config/firebase-adminsdk.json
+/frontend/.env*.local
 
+# Frontend environment variables
+/frontend/.env*
 
 # Vercel
 .vercel
+
+# TypeScript
+*.tsbuildinfo
+/frontend/next-env.d.ts
 
 # Python
 __pycache__/
@@ -42,6 +46,8 @@ __pycache__/
 /backend/venv/
 /backend/env/
 /backend/ENV/
+venv/
+env/
 
 # FastAPI
 /backend/instance/
@@ -51,10 +57,8 @@ __pycache__/
 *.sqlite
 /backend/sql_app.db
 
-# PyCharm
+# IDE
 .idea/
-
-# VS Code
 .vscode/
 
 # Jupyter Notebook
@@ -74,3 +78,10 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+
+# Secrets
+/backend/secrets/
+/backend/app/config/firebase-adminsdk.json
+
+# Testing
+/frontend/coverage

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from firebase_admin import auth
 from firebase_admin._auth_utils import InvalidIdTokenError
-from app.models.user import User
+from app.models.models import User
 from app.schemas import UserCreate, UserResponse
 from app.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
